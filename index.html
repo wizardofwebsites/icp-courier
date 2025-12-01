@@ -1,0 +1,1795 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>ICP Express - International & Domestic Courier Services</title>
+        <!-- Bootstrap CSS -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+        />
+        <!-- Google Fonts -->
+        <link
+            href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Inter:wght@300;400;500;600&display=swap"
+            rel="stylesheet"
+        />
+        <!-- RemixIcon -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/remixicon@4.7.0/fonts/remixicon.css"
+            rel="stylesheet"
+        />
+        <!-- Font Awesome -->
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        />
+        <style>
+            :root {
+                --primary-red: #d32f2f;
+                --dark-red: #b71c1c;
+                --light-red: #ff6659;
+                --gradient-1: linear-gradient(135deg, #d32f2f 0%, #ff6659 100%);
+                --gradient-2: linear-gradient(135deg, #ff6659 0%, #ff8a65 100%);
+                --gradient-3: linear-gradient(135deg, #ff8a65 0%, #ffab91 100%);
+            }
+
+            body {
+                font-family: "Inter", sans-serif;
+                color: #333;
+                line-height: 1.6;
+            }
+
+            h1,
+            h2,
+            h3,
+            h4,
+            h5,
+            h6,
+            .navbar-brand {
+                font-family: "DM Sans", sans-serif;
+                font-weight: 700;
+            }
+
+            .hero-section {
+                height: 85vh;
+                color: white;
+                display: flex;
+                align-items: center;
+                position: relative;
+                overflow: hidden;
+            }
+
+            .hero-slide {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat; /* Added no-repeat */
+                opacity: 0;
+                transition: opacity 1s ease-in-out;
+            }
+
+            /* Added overlay for hero slides */
+            .hero-slide::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(
+                    0,
+                    0,
+                    0,
+                    0.5
+                ); /* 50% opacity black overlay */
+                z-index: 1;
+            }
+
+            .hero-slide.active {
+                opacity: 1;
+            }
+
+            .hero-slide-1 {
+                background-image: url("https://images.unsplash.com/photo-1553413077-190dd305871c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80");
+            }
+
+            .hero-slide-2 {
+                background-image: url("https://images.unsplash.com/photo-1578575437130-527eed3abbec?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80");
+            }
+
+            .hero-slide-3 {
+                background-image: url("https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80");
+            }
+
+            .hero-content {
+                position: relative;
+                z-index: 2;
+            }
+
+            .navbar {
+                background: rgba(255, 255, 255, 0.95);
+                backdrop-filter: blur(10px);
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            }
+
+            .navbar-brand {
+                color: var(--primary-red) !important;
+                font-size: 1.8rem;
+                display: flex;
+                align-items: center;
+            }
+
+            .logo-container {
+                display: flex;
+                align-items: center;
+            }
+
+            .logo-text {
+                display: flex;
+                flex-direction: column;
+                line-height: 1.1;
+            }
+
+            .logo-main {
+                font-size: 1.8rem;
+                font-weight: 700;
+                color: var(--primary-red);
+            }
+
+            .logo-sub {
+                font-size: 0.7rem;
+                font-weight: 500;
+                color: #666;
+                letter-spacing: 0.5px;
+            }
+
+            .nav-link {
+                font-family: "DM Sans", sans-serif;
+                font-weight: 500;
+                color: #333 !important;
+                margin: 0 5px;
+                transition: all 0.3s ease;
+            }
+
+            .nav-link:hover,
+            .nav-link.active {
+                color: var(--primary-red) !important;
+                transform: translateY(-2px);
+            }
+
+            .btn-primary {
+                background: var(--gradient-1);
+                border: none;
+                padding: 12px 30px;
+                font-weight: 600;
+                transition: all 0.3s ease;
+            }
+
+            .btn-primary:hover {
+                background: var(--dark-red);
+                transform: translateY(-3px);
+                box-shadow: 0 5px 15px rgba(211, 47, 47, 0.3);
+            }
+
+            .btn-outline-light:hover {
+                background: white;
+                color: var(--primary-red);
+            }
+
+            .btn-whatsapp {
+                background: #25d366;
+                color: white;
+                border: none;
+                padding: 12px 30px;
+                font-weight: 600;
+                transition: all 0.3s ease;
+            }
+
+            .btn-whatsapp:hover {
+                background: #128c7e;
+                transform: translateY(-3px);
+                box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+            }
+
+            .section-title {
+                position: relative;
+                margin-bottom: 3rem;
+            }
+
+            .section-title:after {
+                content: "";
+                position: absolute;
+                bottom: -10px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 80px;
+                height: 4px;
+                background: var(--gradient-1);
+                border-radius: 2px;
+            }
+
+            .service-card {
+                border: none;
+                border-radius: 15px;
+                overflow: hidden;
+                transition: all 0.4s ease;
+                height: 100%;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            }
+
+            .service-card:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 15px 30px rgba(211, 47, 47, 0.1);
+            }
+
+            .service-icon {
+                font-size: 2.5rem;
+                margin-bottom: 1rem;
+            }
+
+            .country-card {
+                border-radius: 10px;
+                transition: all 0.3s ease;
+                text-align: center;
+                padding: 20px 10px;
+                box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+                height: 100%;
+            }
+
+            .country-card:hover {
+                transform: scale(1.05);
+                box-shadow: 0 10px 20px rgba(211, 47, 47, 0.1);
+            }
+
+            .country-flag {
+                font-size: 2.5rem;
+                margin-bottom: 10px;
+            }
+
+            .provider-logo {
+                transition: all 0.3s ease;
+                opacity: 0.8;
+                filter: grayscale(30%);
+                height: 100px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin: 0 auto;
+            }
+
+            .provider-logo:hover {
+                opacity: 1;
+                transform: scale(1.1);
+                filter: grayscale(0%);
+            }
+
+            .provider-logo img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+                padding: 10px;
+            }
+
+            /* Fixed Carousel Controls */
+            .carousel-control-prev,
+            .carousel-control-next {
+                width: 40px;
+                height: 40px;
+                background-color: var(--primary-red);
+                border-radius: 50%;
+                opacity: 0.8;
+                transition: all 0.3s ease;
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                margin: 0 15px;
+            }
+
+            .carousel-control-prev:hover,
+            .carousel-control-next:hover {
+                opacity: 1;
+                transform: translateY(-50%) scale(1.1);
+            }
+
+            .carousel-control-prev {
+                left: 0;
+            }
+
+            .carousel-control-next {
+                right: 0;
+            }
+
+            .carousel-control-prev-icon,
+            .carousel-control-next-icon {
+                background-image: none;
+                width: 100%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .carousel-control-prev-icon i,
+            .carousel-control-next-icon i {
+                font-size: 1.5rem;
+                color: white;
+            }
+
+            .carousel-indicators {
+                bottom: -40px;
+            }
+
+            .carousel-indicators button {
+                background-color: var(--primary-red);
+                width: 12px;
+                height: 12px;
+                border-radius: 50%;
+                margin: 0 5px;
+            }
+
+            .contact-form {
+                background: white;
+                border-radius: 15px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+                padding: 2rem;
+            }
+
+            .form-control {
+                border: 1px solid #e0e0e0;
+                padding: 12px 15px;
+                border-radius: 8px;
+                transition: all 0.3s ease;
+            }
+
+            .form-control:focus {
+                border-color: var(--primary-red);
+                box-shadow: 0 0 0 0.2rem rgba(211, 47, 47, 0.25);
+            }
+
+            footer {
+                background: #1a1a1a;
+                color: white;
+            }
+
+            .footer-links a {
+                color: #ccc;
+                text-decoration: none;
+                transition: color 0.3s ease;
+            }
+
+            .footer-links a:hover {
+                color: white;
+            }
+
+            .back-to-top {
+                position: fixed;
+                bottom: 30px;
+                right: 30px;
+                background: var(--gradient-1);
+                color: white;
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-decoration: none;
+                box-shadow: 0 3px 10px rgba(211, 47, 47, 0.3);
+                opacity: 0;
+                transition: all 0.3s ease;
+                z-index: 1000;
+            }
+
+            .back-to-top.visible {
+                opacity: 1;
+            }
+
+            .stats-section {
+                background: var(--gradient-1);
+                color: white;
+                padding: 60px 0;
+            }
+
+            .stat-number {
+                font-size: 3rem;
+                font-weight: 700;
+                margin-bottom: 0;
+            }
+
+            .stat-label {
+                font-size: 1.1rem;
+                opacity: 0.9;
+            }
+
+            .whatsapp-float {
+                position: fixed;
+                bottom: 30px;
+                left: 30px;
+                background: #25d366;
+                color: white;
+                width: 60px;
+                height: 60px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-decoration: none;
+                box-shadow: 0 3px 10px rgba(37, 211, 102, 0.3);
+                z-index: 1000;
+                transition: all 0.3s ease;
+            }
+
+            .whatsapp-float:hover {
+                transform: scale(1.1);
+                background: #128c7e;
+            }
+
+            .whatsapp-icon {
+                font-size: 1.8rem;
+            }
+
+            .alert-success {
+                background: rgba(37, 211, 102, 0.1);
+                border: 1px solid #25d366;
+                color: #128c7e;
+            }
+
+            .custom-logo {
+                width: 120px;
+                height: 60px;
+                margin-right: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background-color: #f8f9fa;
+                border: 1px dashed #dee2e6;
+                border-radius: 8px;
+                color: #6c757d;
+                font-weight: bold;
+            }
+
+            .custom-logo img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+            }
+
+            .logo-placeholder {
+                font-size: 0.8rem;
+                text-align: center;
+            }
+
+            /* Responsive adjustments for provider logos */
+            @media (max-width: 768px) {
+                .custom-logo {
+                    width: 100px;
+                    height: 50px;
+                }
+
+                .carousel-control-prev,
+                .carousel-control-next {
+                    width: 35px;
+                    height: 35px;
+                    margin: 0 10px;
+                }
+
+                .provider-logo {
+                    height: 80px;
+                }
+
+                /* Show only 2 logos per row on tablets and below */
+                .carousel-inner .row .col-6 {
+                    width: 50% !important;
+                    max-width: 50% !important;
+                    flex: 0 0 50% !important;
+                }
+            }
+
+            @media (max-width: 576px) {
+                .provider-logo {
+                    height: 60px;
+                }
+
+                .carousel-control-prev,
+                .carousel-control-next {
+                    width: 30px;
+                    height: 30px;
+                    margin: 0 5px;
+                }
+
+                /* Ensure only 2 logos per row on mobile */
+                .carousel-inner .row .col-6 {
+                    width: 50% !important;
+                    max-width: 50% !important;
+                    flex: 0 0 50% !important;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+            <div class="container">
+                <a class="navbar-brand fw-bold" href="#">
+                    <div class="logo-container">
+                        <div class="custom-logo" id="mainLogo">
+                            <div class="logo-placeholder">
+                                ICP LOGO<br />
+                                <small>120px × 60px</small>
+                            </div>
+                        </div>
+                        <div class="logo-text">
+                            <span class="logo-main">ICP EXPRESS</span>
+                            <span class="logo-sub"
+                                >International & Domestic & Cargo Services</span
+                            >
+                        </div>
+                    </div>
+                </a>
+                <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarNav"
+                >
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#home">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#services">Services</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#countries">Countries</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#providers">Providers</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#contact">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- WhatsApp Float Button -->
+        <a
+            href="https://wa.me/+919876543210?text=Hi%20ICP%20Express%2C%20I%20would%20like%20to%20know%20more%20about%20your%20services"
+            class="whatsapp-float"
+            target="_blank"
+        >
+            <i class="fab fa-whatsapp whatsapp-icon"></i>
+        </a>
+
+        <!-- Hidden Admin Access Trigger -->
+        <div id="adminTrigger" style="display: none"></div>
+
+        <!-- Hero Section with Slider -->
+        <section id="home" class="hero-section">
+            <!-- Hero Slides -->
+            <div class="hero-slide hero-slide-1 active"></div>
+            <div class="hero-slide hero-slide-2"></div>
+            <div class="hero-slide hero-slide-3"></div>
+
+            <div class="container text-center hero-content">
+                <h1 class="display-3 fw-bold mb-4">ICP EXPRESS</h1>
+                <h2 class="display-6 mb-4">
+                    INTERNATIONAL, DOMESTIC & CARGO SERVICES
+                </h2>
+                <p class="lead mb-4">
+                    Your trusted partner for reliable international courier
+                    services to over 200 countries
+                </p>
+                <a href="#services" class="btn btn-primary btn-lg px-4 me-3"
+                    >Our Services</a
+                >
+                <a href="#contact" class="btn btn-outline-light btn-lg px-4"
+                    >Get Quote</a
+                >
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="stats-section">
+            <div class="container">
+                <div class="row text-center">
+                    <div class="col-md-3 col-6 mb-4">
+                        <p class="stat-number">200+</p>
+                        <p class="stat-label">Countries Served</p>
+                    </div>
+                    <div class="col-md-3 col-6 mb-4">
+                        <p class="stat-number">50K+</p>
+                        <p class="stat-label">Deliveries</p>
+                    </div>
+                    <div class="col-md-3 col-6 mb-4">
+                        <p class="stat-number">99%</p>
+                        <p class="stat-label">On-Time Delivery</p>
+                    </div>
+                    <div class="col-md-3 col-6 mb-4">
+                        <p class="stat-number">24/7</p>
+                        <p class="stat-label">Customer Support</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="py-5 bg-light">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <h2 class="display-5 fw-bold section-title">
+                        Our Services
+                    </h2>
+                    <p class="lead">
+                        We deliver a wide range of items across the globe with
+                        care and precision
+                    </p>
+                </div>
+                <div class="row g-4">
+                    <!-- Service Cards -->
+                    <div class="col-md-4 col-sm-6">
+                        <div class="card service-card h-100 border-0">
+                            <div class="card-body text-center p-4">
+                                <div class="service-icon">🥒</div>
+                                <h5 class="card-title">Pickles</h5>
+                                <p class="card-text">
+                                    Safely deliver homemade and commercial
+                                    pickles worldwide with specialized packaging
+                                    to preserve freshness.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <div class="card service-card h-100 border-0">
+                            <div class="card-body text-center p-4">
+                                <div class="service-icon">📚</div>
+                                <h5 class="card-title">Books</h5>
+                                <p class="card-text">
+                                    Fast and secure delivery of books,
+                                    documents, and educational materials to any
+                                    destination.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <div class="card service-card h-100 border-0">
+                            <div class="card-body text-center p-4">
+                                <div class="service-icon">💊</div>
+                                <h5 class="card-title">Medicines</h5>
+                                <p class="card-text">
+                                    Temperature-controlled delivery for
+                                    essential medicines and healthcare products
+                                    with priority handling.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <div class="card service-card h-100 border-0">
+                            <div class="card-body text-center p-4">
+                                <div class="service-icon">📄</div>
+                                <h5 class="card-title">Documents</h5>
+                                <p class="card-text">
+                                    Secure and timely delivery of important
+                                    documents, legal papers, and confidential
+                                    materials.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <div class="card service-card h-100 border-0">
+                            <div class="card-body text-center p-4">
+                                <div class="service-icon">👕</div>
+                                <h5 class="card-title">Clothes</h5>
+                                <p class="card-text">
+                                    Reliable delivery of clothing items,
+                                    textiles, and fashion products with careful
+                                    packaging.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <div class="card service-card h-100 border-0">
+                            <div class="card-body text-center p-4">
+                                <div class="service-icon">🎁</div>
+                                <h5 class="card-title">Gifts</h5>
+                                <p class="card-text">
+                                    Special handling for gifts and personal
+                                    items to make every delivery memorable and
+                                    special.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <div class="card service-card h-100 border-0">
+                            <div class="card-body text-center p-4">
+                                <div class="service-icon">💻</div>
+                                <h5 class="card-title">Electronics</h5>
+                                <p class="card-text">
+                                    Secure packaging and insurance for
+                                    electronic devices, gadgets, and technical
+                                    equipment.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <div class="card service-card h-100 border-0">
+                            <div class="card-body text-center p-4">
+                                <div class="service-icon">🍎</div>
+                                <h5 class="card-title">Food Items</h5>
+                                <p class="card-text">
+                                    Specialized delivery for perishable and
+                                    non-perishable food items with proper
+                                    temperature control.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <div class="card service-card h-100 border-0">
+                            <div class="card-body text-center p-4">
+                                <div class="service-icon">🕯️</div>
+                                <h5 class="card-title">Pooja Items</h5>
+                                <p class="card-text">
+                                    Careful handling of religious and spiritual
+                                    items with the respect and attention they
+                                    deserve.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <div class="card service-card h-100 border-0">
+                            <div class="card-body text-center p-4">
+                                <div class="service-icon">🌶️</div>
+                                <h5 class="card-title">Spices</h5>
+                                <p class="card-text">
+                                    Airtight packaging to preserve the aroma,
+                                    flavor, and quality of spices during
+                                    transit.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <div class="card service-card h-100 border-0">
+                            <div class="card-body text-center p-4">
+                                <div class="service-icon">🍿</div>
+                                <h5 class="card-title">Snacks</h5>
+                                <p class="card-text">
+                                    Fresh delivery of snacks and food products
+                                    with proper packaging to maintain quality.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Countries Section -->
+        <section id="countries" class="py-5">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <h2 class="display-5 fw-bold section-title">
+                        Servicing Countries
+                    </h2>
+                    <p class="lead">
+                        We deliver to over 200 countries worldwide with reliable
+                        service
+                    </p>
+                </div>
+                <div class="row g-4">
+                    <!-- Country Cards -->
+                    <div class="col-md-3 col-sm-4 col-6">
+                        <div class="country-card">
+                            <div class="country-flag">🇺🇸</div>
+                            <h5>USA</h5>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-4 col-6">
+                        <div class="country-card">
+                            <div class="country-flag">🇬🇧</div>
+                            <h5>UK</h5>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-4 col-6">
+                        <div class="country-card">
+                            <div class="country-flag">🇨🇦</div>
+                            <h5>CANADA</h5>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-4 col-6">
+                        <div class="country-card">
+                            <div class="country-flag">🇩🇪</div>
+                            <h5>GERMANY</h5>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-4 col-6">
+                        <div class="country-card">
+                            <div class="country-flag">🇪🇺</div>
+                            <h5>EUROPE</h5>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-4 col-6">
+                        <div class="country-card">
+                            <div class="country-flag">🇷🇺</div>
+                            <h5>RUSSIA</h5>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-4 col-6">
+                        <div class="country-card">
+                            <div class="country-flag">🇦🇺</div>
+                            <h5>AUSTRALIA</h5>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-4 col-6">
+                        <div class="country-card">
+                            <div class="country-flag">🇦🇪</div>
+                            <h5>UAE</h5>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-4 col-6">
+                        <div class="country-card">
+                            <div class="country-flag">🇯🇵</div>
+                            <h5>JAPAN</h5>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-4 col-6">
+                        <div class="country-card">
+                            <div class="country-flag">🇿🇦</div>
+                            <h5>SOUTH AFRICA</h5>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-4 col-6">
+                        <div class="country-card">
+                            <div class="country-flag">🇧🇷</div>
+                            <h5>SOUTH AMERICA</h5>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-4 col-6">
+                        <div class="country-card">
+                            <div class="country-flag">🌍</div>
+                            <h5>AND MANY MORE</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Providers Section -->
+        <section id="providers" class="py-5 bg-light">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <h2 class="display-5 fw-bold section-title">
+                        Our Courier Providers
+                    </h2>
+                    <p class="lead">
+                        Partnering with world's leading courier services for
+                        reliable delivery
+                    </p>
+                </div>
+
+                <!-- International Providers Carousel -->
+                <div class="mb-5">
+                    <h4 class="text-center mb-4">
+                        International Service Providers
+                    </h4>
+                    <div
+                        id="internationalCarousel"
+                        class="carousel slide"
+                        data-bs-ride="carousel"
+                    >
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <div class="row justify-content-center">
+                                    <div
+                                        class="col-lg-3 col-md-4 col-6 text-center mb-4"
+                                    >
+                                        <div class="provider-logo">
+                                            <img
+                                                src="images/fedex.png"
+                                                alt="FedEx"
+                                            />
+                                        </div>
+                                        <h6 class="mt-2">FedEx</h6>
+                                    </div>
+                                    <div
+                                        class="col-lg-3 col-md-4 col-6 text-center mb-4"
+                                    >
+                                        <div class="provider-logo">
+                                            <img
+                                                src="images/dhl.png"
+                                                alt="DHL"
+                                            />
+                                        </div>
+                                        <h6 class="mt-2">DHL</h6>
+                                    </div>
+                                    <div
+                                        class="col-lg-3 col-md-4 col-6 text-center mb-4"
+                                    >
+                                        <div class="provider-logo">
+                                            <img
+                                                src="images/ups.png"
+                                                alt="UPS"
+                                            />
+                                        </div>
+                                        <h6 class="mt-2">UPS</h6>
+                                    </div>
+                                    <div
+                                        class="col-lg-3 col-md-4 col-6 text-center mb-4"
+                                    >
+                                        <div class="provider-logo">
+                                            <img
+                                                src="images/dpd.png"
+                                                alt="DPD"
+                                            />
+                                        </div>
+                                        <h6 class="mt-2">DPD</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="row justify-content-center">
+                                    <div
+                                        class="col-lg-3 col-md-4 col-6 text-center mb-4"
+                                    >
+                                        <div class="provider-logo">
+                                            <img
+                                                src="images/aramex.png"
+                                                alt="Aramex"
+                                            />
+                                        </div>
+                                        <h6 class="mt-2">Aramex</h6>
+                                    </div>
+                                    <div
+                                        class="col-lg-3 col-md-4 col-6 text-center mb-4"
+                                    >
+                                        <div class="provider-logo">
+                                            <img
+                                                src="images/usps.png"
+                                                alt="USPS"
+                                            />
+                                        </div>
+                                        <h6 class="mt-2">USPS</h6>
+                                    </div>
+                                    <!-- Empty columns to maintain 4 items per row on desktop -->
+                                    <div class="col-lg-3 col-md-4 col-6"></div>
+                                    <div class="col-lg-3 col-md-4 col-6"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <button
+                            class="carousel-control-prev"
+                            type="button"
+                            data-bs-target="#internationalCarousel"
+                            data-bs-slide="prev"
+                        >
+                            <span
+                                class="carousel-control-prev-icon"
+                                aria-hidden="true"
+                            >
+                                <i class="ri-arrow-left-line"></i>
+                            </span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button
+                            class="carousel-control-next"
+                            type="button"
+                            data-bs-target="#internationalCarousel"
+                            data-bs-slide="next"
+                        >
+                            <span
+                                class="carousel-control-next-icon"
+                                aria-hidden="true"
+                            >
+                                <i class="ri-arrow-right-line"></i>
+                            </span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                        <!-- Carousel Indicators -->
+                        <div class="carousel-indicators">
+                            <button
+                                type="button"
+                                data-bs-target="#internationalCarousel"
+                                data-bs-slide-to="0"
+                                class="active"
+                                aria-current="true"
+                                aria-label="Slide 1"
+                            ></button>
+                            <button
+                                type="button"
+                                data-bs-target="#internationalCarousel"
+                                data-bs-slide-to="1"
+                                aria-label="Slide 2"
+                            ></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Indian Domestic Providers Carousel -->
+                <div>
+                    <h4 class="text-center mb-4">
+                        Indian Domestic Service Providers
+                    </h4>
+                    <div
+                        id="indianCarousel"
+                        class="carousel slide"
+                        data-bs-ride="carousel"
+                    >
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <div class="row justify-content-center">
+                                    <div
+                                        class="col-lg-3 col-md-4 col-6 text-center mb-4"
+                                    >
+                                        <div class="provider-logo">
+                                            <img
+                                                src="images/dtdc.png"
+                                                alt="DTDC"
+                                            />
+                                        </div>
+                                        <h6 class="mt-2">DTDC</h6>
+                                    </div>
+                                    <div
+                                        class="col-lg-3 col-md-4 col-6 text-center mb-4"
+                                    >
+                                        <div class="provider-logo">
+                                            <img
+                                                src="images/bluedart.png"
+                                                alt="Blue Dart"
+                                            />
+                                        </div>
+                                        <h6 class="mt-2">Blue Dart</h6>
+                                    </div>
+                                    <div
+                                        class="col-lg-3 col-md-4 col-6 text-center mb-4"
+                                    >
+                                        <div class="provider-logo">
+                                            <img
+                                                src="images/delhivery.png"
+                                                alt="Delhivery"
+                                            />
+                                        </div>
+                                        <h6 class="mt-2">Delhivery</h6>
+                                    </div>
+                                    <div
+                                        class="col-lg-3 col-md-4 col-6 text-center mb-4"
+                                    >
+                                        <div class="provider-logo">
+                                            <img
+                                                src="images/ecom.png"
+                                                alt="Ecom Express"
+                                            />
+                                        </div>
+                                        <h6 class="mt-2">Ecom Express</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="row justify-content-center">
+                                    <div
+                                        class="col-lg-3 col-md-4 col-6 text-center mb-4"
+                                    >
+                                        <div class="provider-logo">
+                                            <img
+                                                src="images/xpress.png"
+                                                alt="XpressBees"
+                                            />
+                                        </div>
+                                        <h6 class="mt-2">XpressBees</h6>
+                                    </div>
+                                    <div
+                                        class="col-lg-3 col-md-4 col-6 text-center mb-4"
+                                    >
+                                        <div class="provider-logo">
+                                            <img
+                                                src="images/shiprocket.png"
+                                                alt="Shiprocket"
+                                            />
+                                        </div>
+                                        <h6 class="mt-2">Shiprocket</h6>
+                                    </div>
+                                    <div
+                                        class="col-lg-3 col-md-4 col-6 text-center mb-4"
+                                    >
+                                        <div class="provider-logo">
+                                            <img
+                                                src="images/postoffice.png"
+                                                alt="Safexpress"
+                                            />
+                                        </div>
+                                        <h6 class="mt-2">Indian Postal</h6>
+                                    </div>
+                                    <!-- Empty column to maintain 4 items per row on desktop -->
+                                    <div class="col-lg-3 col-md-4 col-6"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <button
+                            class="carousel-control-prev"
+                            type="button"
+                            data-bs-target="#indianCarousel"
+                            data-bs-slide="prev"
+                        >
+                            <span
+                                class="carousel-control-prev-icon"
+                                aria-hidden="true"
+                            >
+                                <i class="ri-arrow-left-line"></i>
+                            </span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button
+                            class="carousel-control-next"
+                            type="button"
+                            data-bs-target="#indianCarousel"
+                            data-bs-slide="next"
+                        >
+                            <span
+                                class="carousel-control-next-icon"
+                                aria-hidden="true"
+                            >
+                                <i class="ri-arrow-right-line"></i>
+                            </span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                        <!-- Carousel Indicators -->
+                        <div class="carousel-indicators">
+                            <button
+                                type="button"
+                                data-bs-target="#indianCarousel"
+                                data-bs-slide-to="0"
+                                class="active"
+                                aria-current="true"
+                                aria-label="Slide 1"
+                            ></button>
+                            <button
+                                type="button"
+                                data-bs-target="#indianCarousel"
+                                data-bs-slide-to="1"
+                                aria-label="Slide 2"
+                            ></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-5">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <h2 class="display-5 fw-bold section-title">Contact Us</h2>
+                    <p class="lead">
+                        Get in touch for your courier needs - we're here to
+                        help!
+                    </p>
+                    <p class="text-muted">
+                        Fill out the form below and we'll contact you via
+                        WhatsApp
+                    </p>
+                </div>
+                <div class="row">
+                    <div class="col-md-8 mx-auto">
+                        <div class="contact-form">
+                            <form id="whatsappForm">
+                                <div
+                                    id="formAlert"
+                                    class="alert alert-success d-none"
+                                    role="alert"
+                                >
+                                    Form submitted successfully! You'll be
+                                    redirected to WhatsApp.
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="name" class="form-label"
+                                            >Full Name *</label
+                                        >
+                                        <input
+                                            type="text"
+                                            class="form-control"
+                                            id="name"
+                                            placeholder="Enter your name"
+                                            required
+                                        />
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="email" class="form-label"
+                                            >Email Address *</label
+                                        >
+                                        <input
+                                            type="email"
+                                            class="form-control"
+                                            id="email"
+                                            placeholder="Enter your email"
+                                            required
+                                        />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="phone" class="form-label"
+                                            >Phone Number *</label
+                                        >
+                                        <input
+                                            type="tel"
+                                            class="form-control"
+                                            id="phone"
+                                            placeholder="Enter your phone number"
+                                            required
+                                        />
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="service" class="form-label"
+                                            >Service Required</label
+                                        >
+                                        <select
+                                            class="form-control"
+                                            id="service"
+                                        >
+                                            <option value="">
+                                                Select a service
+                                            </option>
+                                            <option value="pickles">
+                                                Pickles
+                                            </option>
+                                            <option value="books">Books</option>
+                                            <option value="medicines">
+                                                Medicines
+                                            </option>
+                                            <option value="documents">
+                                                Documents
+                                            </option>
+                                            <option value="clothes">
+                                                Clothes
+                                            </option>
+                                            <option value="gifts">Gifts</option>
+                                            <option value="electronics">
+                                                Electronics
+                                            </option>
+                                            <option value="food">
+                                                Food Items
+                                            </option>
+                                            <option value="pooja">
+                                                Pooja Items
+                                            </option>
+                                            <option value="spices">
+                                                Spices
+                                            </option>
+                                            <option value="snacks">
+                                                Snacks
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="message" class="form-label"
+                                        >Message *</label
+                                    >
+                                    <textarea
+                                        class="form-control"
+                                        id="message"
+                                        rows="5"
+                                        placeholder="Tell us about your courier requirements"
+                                        required
+                                    ></textarea>
+                                </div>
+                                <button
+                                    type="submit"
+                                    class="btn btn-whatsapp btn-lg w-100"
+                                >
+                                    <i class="fab fa-whatsapp me-2"></i> Send
+                                    via WhatsApp
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="py-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 mb-4">
+                        <div class="logo-container mb-3">
+                            <div class="custom-logo" id="footerLogo">
+                                <div class="logo-placeholder">
+                                    ICP LOGO<br />
+                                    <small>120px × 60px</small>
+                                </div>
+                            </div>
+                        </div>
+                        <p>
+                            Your trusted partner for reliable international
+                            courier services with a commitment to excellence and
+                            timely delivery.
+                        </p>
+                        <div class="mt-4">
+                            <a href="#" class="text-white me-3"
+                                ><i class="fab fa-facebook-f"></i
+                            ></a>
+                            <a href="#" class="text-white me-3"
+                                ><i class="fab fa-twitter"></i
+                            ></a>
+                            <a href="#" class="text-white me-3"
+                                ><i class="fab fa-instagram"></i
+                            ></a>
+                            <a href="#" class="text-white"
+                                ><i class="fab fa-linkedin-in"></i
+                            ></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-6 mb-4">
+                        <h5 class="mb-3">Quick Links</h5>
+                        <ul class="list-unstyled footer-links">
+                            <li class="mb-2"><a href="#home">Home</a></li>
+                            <li class="mb-2">
+                                <a href="#services">Services</a>
+                            </li>
+                            <li class="mb-2">
+                                <a href="#countries">Countries</a>
+                            </li>
+                            <li class="mb-2">
+                                <a href="#providers">Providers</a>
+                            </li>
+                            <li class="mb-2"><a href="#contact">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <h5 class="mb-3">Contact Info</h5>
+                        <p class="mb-2">
+                            <i class="fas fa-phone me-2"></i> +1 (555) 123-4567
+                        </p>
+                        <p class="mb-2">
+                            <i class="fas fa-envelope me-2"></i>
+                            info@icpexpress.com
+                        </p>
+                        <p class="mb-2">
+                            <i class="fas fa-map-marker-alt me-2"></i> 123
+                            Courier St, Logistics City
+                        </p>
+                        <p><i class="fas fa-clock me-2"></i> Mon-Sun: 24/7</p>
+                    </div>
+                    <div class="col-lg-3 mb-4">
+                        <h5 class="mb-3">Connect via WhatsApp</h5>
+                        <p>
+                            Quick responses and instant support through
+                            WhatsApp.
+                        </p>
+                        <a
+                            href="https://wa.me/+919876543210?text=Hi%20ICP%20Express%2C%20I%20would%20like%20to%20know%20more%20about%20your%20services"
+                            class="btn btn-whatsapp w-100"
+                            target="_blank"
+                        >
+                            <i class="fab fa-whatsapp me-2"></i> Message Us
+                        </a>
+                    </div>
+                </div>
+                <hr class="my-4" />
+                <div class="text-center">
+                    <p>&copy; 2023 ICP Express. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Back to Top Button -->
+        <a href="#" class="back-to-top">
+            <i class="fas fa-arrow-up"></i>
+        </a>
+
+        <!-- Bootstrap JS -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+        <!-- Website Script (Public) -->
+        <script>
+            // Initialize the website
+            document.addEventListener("DOMContentLoaded", function () {
+                updateWebsiteLogos();
+
+                // Hero Slider Functionality
+                let currentSlide = 0;
+                const slides = document.querySelectorAll(".hero-slide");
+
+                function showSlide(index) {
+                    slides.forEach((slide) => slide.classList.remove("active"));
+                    slides[index].classList.add("active");
+                }
+
+                function nextSlide() {
+                    currentSlide = (currentSlide + 1) % slides.length;
+                    showSlide(currentSlide);
+                }
+
+                // Auto-advance slides every 5 seconds
+                setInterval(nextSlide, 5000);
+
+                // Smooth scrolling for navigation links
+                document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+                    anchor.addEventListener("click", function (e) {
+                        e.preventDefault();
+                        document
+                            .querySelector(this.getAttribute("href"))
+                            .scrollIntoView({
+                                behavior: "smooth",
+                            });
+                    });
+                });
+
+                // Back to top button
+                const backToTopButton = document.querySelector(".back-to-top");
+
+                window.addEventListener("scroll", () => {
+                    if (window.pageYOffset > 300) {
+                        backToTopButton.classList.add("visible");
+                    } else {
+                        backToTopButton.classList.remove("visible");
+                    }
+                });
+
+                backToTopButton.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                });
+
+                // Navbar background on scroll
+                window.addEventListener("scroll", function () {
+                    if (window.scrollY > 50) {
+                        document.querySelector(".navbar").style.background =
+                            "rgba(255, 255, 255, 0.98)";
+                    } else {
+                        document.querySelector(".navbar").style.background =
+                            "rgba(255, 255, 255, 0.95)";
+                    }
+                });
+
+                // Form submission handler
+                document
+                    .getElementById("whatsappForm")
+                    .addEventListener("submit", function (e) {
+                        e.preventDefault();
+                        sendToWhatsapp();
+                    });
+            });
+
+            // WhatsApp Integration Script
+            function sendToWhatsapp() {
+                // Replace with your actual WhatsApp number
+                let number = "+919876543210";
+
+                let name = document.getElementById("name").value;
+                let email = document.getElementById("email").value;
+                let phone = document.getElementById("phone").value;
+                let service = document.getElementById("service").value;
+                let message = document.getElementById("message").value;
+
+                // Show success message
+                document.getElementById("formAlert").classList.remove("d-none");
+
+                // Construct the WhatsApp message
+                var url =
+                    "https://wa.me/" +
+                    number +
+                    "?text=" +
+                    "🌟 *NEW CONTACT FORM SUBMISSION* 🌟%0a%0a" +
+                    "👤 *Name:* " +
+                    name +
+                    "%0a" +
+                    "📧 *Email:* " +
+                    email +
+                    "%0a" +
+                    "📞 *Phone:* " +
+                    phone +
+                    "%0a" +
+                    (service
+                        ? "📦 *Service Required:* " + service + "%0a"
+                        : "") +
+                    "💬 *Message:* " +
+                    message +
+                    "%0a%0a" +
+                    "_This message was sent from the ICP Express website_";
+
+                // Open WhatsApp after a short delay to show the success message
+                setTimeout(function () {
+                    window.open(url, "_blank").focus();
+                }, 1000);
+
+                // Prevent form submission
+                return false;
+            }
+
+            // Update Website Logos
+            function updateWebsiteLogos() {
+                // Check if logo exists in localStorage (admin panel will set this)
+                const savedMainLogo = localStorage.getItem("icpMainLogo");
+                if (savedMainLogo) {
+                    const mainLogo = document.getElementById("mainLogo");
+                    const footerLogo = document.getElementById("footerLogo");
+
+                    if (mainLogo) {
+                        mainLogo.innerHTML = `<img src="${savedMainLogo}" alt="ICP Express" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\\'logo-placeholder\\'>ICP LOGO<br><small>120px × 60px</small></div>';">`;
+                    }
+
+                    if (footerLogo) {
+                        footerLogo.innerHTML = `<img src="${savedMainLogo}" alt="ICP Express" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\\'logo-placeholder\\'>ICP LOGO<br><small>120px × 60px</small></div>';">`;
+                    }
+                }
+            }
+
+            // Admin access trigger
+            document
+                .getElementById("adminTrigger")
+                .addEventListener("click", function () {
+                    loadAdminScript();
+                });
+        </script>
+
+        <!-- Hidden Admin Script (Loaded dynamically) -->
+        <script id="adminScriptLoader" type="text/javascript">
+            // This script will be loaded dynamically when needed
+            function loadAdminScript() {
+                // Create a hidden iframe to load admin script
+                const iframe = document.createElement("iframe");
+                iframe.style.display = "none";
+                iframe.srcdoc = `
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>Admin Loader</title>
+                    <script>
+                        // Admin Panel Password
+                        const ADMIN_PASSWORD = "icpadmin2023";
+
+                        // Check if password is correct
+                        function checkPassword() {
+                            const savedPassword = localStorage.getItem('icpAdminPassword');
+                            return savedPassword === ADMIN_PASSWORD;
+                        }
+
+                        // Load admin panel if password is correct
+                        if (checkPassword()) {
+                            // Create admin panel elements
+                            const adminPanel = document.createElement('div');
+                            adminPanel.id = 'adminPanel';
+                            adminPanel.innerHTML = \`
+                                <style>
+                                    .admin-panel {
+                                        position: fixed;
+                                        top: 0;
+                                        left: 0;
+                                        width: 100%;
+                                        height: 100%;
+                                        background: rgba(0,0,0,0.9);
+                                        z-index: 9999;
+                                        overflow-y: auto;
+                                        padding: 20px;
+                                        display: block;
+                                    }
+
+                                    .admin-container {
+                                        background: white;
+                                        border-radius: 15px;
+                                        padding: 30px;
+                                        max-width: 800px;
+                                        margin: 50px auto;
+                                        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+                                    }
+
+                                    .admin-header {
+                                        display: flex;
+                                        justify-content: space-between;
+                                        align-items: center;
+                                        margin-bottom: 30px;
+                                        padding-bottom: 15px;
+                                        border-bottom: 2px solid #d32f2f;
+                                    }
+
+                                    .admin-section {
+                                        margin-bottom: 40px;
+                                        padding: 20px;
+                                        border: 1px solid #e0e0e0;
+                                        border-radius: 10px;
+                                    }
+
+                                    .admin-section h3 {
+                                        color: #d32f2f;
+                                        margin-bottom: 20px;
+                                    }
+
+                                    .upload-area {
+                                        border: 2px dashed #ccc;
+                                        border-radius: 10px;
+                                        padding: 30px;
+                                        text-align: center;
+                                        margin-bottom: 20px;
+                                        transition: all 0.3s ease;
+                                    }
+
+                                    .logo-preview {
+                                        width: 120px;
+                                        height: 60px;
+                                        margin: 0 auto 20px;
+                                        border: 1px solid #e0e0e0;
+                                        border-radius: 8px;
+                                        display: flex;
+                                        align-items: center;
+                                        justify-content: center;
+                                        overflow: hidden;
+                                    }
+
+                                    .file-path-input {
+                                        margin-top: 15px;
+                                    }
+                                </style>
+                                <div class="admin-container">
+                                    <div class="admin-header">
+                                        <h2>ICP Express - Admin Panel</h2>
+                                        <button class="btn btn-outline-danger" id="closeAdminPanel">
+                                            <i class="fas fa-times me-2"></i>Close
+                                        </button>
+                                    </div>
+
+                                    <div class="admin-section">
+                                        <h3>Main Company Logo</h3>
+                                        <p class="text-muted mb-3">Upload your main company logo (Recommended: 120px × 60px)</p>
+
+                                        <div class="upload-area" id="mainLogoUpload">
+                                            <i class="fas fa-cloud-upload-alt fa-3x text-muted mb-3"></i>
+                                            <p>Drag & drop your logo here or click to browse</p>
+                                            <input type="file" id="mainLogoInput" accept="image/*" style="display: none;">
+                                            <button class="btn btn-outline-primary mt-2" onclick="document.getElementById('mainLogoInput').click()">
+                                                Select Logo
+                                            </button>
+                                        </div>
+
+                                        <div class="file-path-input">
+                                            <label class="form-label">Or enter image path:</label>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" id="mainLogoPath" placeholder="images/logo.png">
+                                                <button class="btn btn-primary" id="loadMainLogoPath">Load Logo</button>
+                                            </div>
+                                        </div>
+
+                                        <div class="logo-preview" id="mainLogoPreview">
+                                            <div class="logo-placeholder">
+                                                Logo Preview<br>
+                                                <small>120px × 60px</small>
+                                            </div>
+                                        </div>
+
+                                        <div class="d-flex justify-content-between mt-3">
+                                            <button class="btn btn-primary" id="saveMainLogo">
+                                                <i class="fas fa-save me-2"></i>Save Logo
+                                            </button>
+                                            <button class="btn btn-outline-secondary" id="resetMainLogo">
+                                                <i class="fas fa-undo me-2"></i>Reset to Default
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            \`;
+
+                            document.body.appendChild(adminPanel);
+
+                            // Add event listeners
+                            document.getElementById('closeAdminPanel').addEventListener('click', function() {
+                                adminPanel.remove();
+                            });
+
+                            // Load saved logo
+                            const savedMainLogo = localStorage.getItem('icpMainLogo');
+                            if (savedMainLogo) {
+                                document.getElementById('mainLogoPreview').innerHTML = \`<img src="\${savedMainLogo}" alt="Logo Preview">\`;
+                            }
+
+                            // Main Logo Upload
+                            document.getElementById('mainLogoInput').addEventListener('change', function(e) {
+                                const file = e.target.files[0];
+                                if (file) {
+                                    const reader = new FileReader();
+                                    reader.onload = function(e) {
+                                        document.getElementById('mainLogoPreview').innerHTML = \`<img src="\${e.target.result}" alt="Logo Preview">\`;
+                                        localStorage.setItem('icpMainLogo', e.target.result);
+                                        // Update parent window
+                                        window.parent.postMessage({type: 'logoUpdated', logo: e.target.result}, '*');
+                                    };
+                                    reader.readAsDataURL(file);
+                                }
+                            });
+
+                            // Load Main Logo from Path
+                            document.getElementById('loadMainLogoPath').addEventListener('click', function() {
+                                const path = document.getElementById('mainLogoPath').value.trim();
+                                if (path) {
+                                    document.getElementById('mainLogoPreview').innerHTML = \`<img src="\${path}" alt="Logo Preview" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\\'logo-placeholder\\'>Invalid Path<br><small>120px × 60px</small></div>';">\`;
+                                    localStorage.setItem('icpMainLogo', path);
+                                    window.parent.postMessage({type: 'logoUpdated', logo: path}, '*');
+                                }
+                            });
+
+                            // Save Main Logo
+                            document.getElementById('saveMainLogo').addEventListener('click', function() {
+                                const logo = localStorage.getItem('icpMainLogo');
+                                if (logo) {
+                                    alert('Main logo saved successfully!');
+                                    window.parent.postMessage({type: 'logoUpdated', logo: logo}, '*');
+                                } else {
+                                    alert('Please upload a logo or enter a valid path first.');
+                                }
+                            });
+
+                            // Reset Main Logo
+                            document.getElementById('resetMainLogo').addEventListener('click', function() {
+                                localStorage.removeItem('icpMainLogo');
+                                document.getElementById('mainLogoPreview').innerHTML = \`
+                                    <div class="logo-placeholder">
+                                        Logo Preview<br>
+                                        <small>120px × 60px</small>
+                                    </div>
+                                \`;
+                                alert('Main logo reset to default.');
+                                window.parent.postMessage({type: 'logoUpdated', logo: null}, '*');
+                            });
+                        }
+                    <\/script>
+                </head>
+                <body>
+                    <div id="adminContent"></div>
+                </body>
+                </html>
+            `;
+
+                document.body.appendChild(iframe);
+
+                // Listen for messages from iframe
+                window.addEventListener("message", function (event) {
+                    if (event.data.type === "logoUpdated") {
+                        updateWebsiteLogos();
+                    }
+                });
+            }
+
+            // Secret admin access (triggered by specific sequence)
+            let keySequence = "";
+            const secretCode = "icpadmin";
+
+            document.addEventListener("keydown", function (e) {
+                keySequence += e.key.toLowerCase();
+                if (keySequence.length > secretCode.length) {
+                    keySequence = keySequence.substring(
+                        keySequence.length - secretCode.length,
+                    );
+                }
+
+                if (keySequence === secretCode) {
+                    // Show password prompt
+                    const password = prompt("Enter admin password:");
+                    if (password === "icpadmin2023") {
+                        localStorage.setItem("icpAdminPassword", password);
+                        loadAdminScript();
+                        alert("Admin panel loaded. Refresh page to access.");
+                    }
+                    keySequence = "";
+                }
+            });
+        </script>
+    </body>
+</html>
