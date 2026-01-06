@@ -68,12 +68,11 @@
                 height: 100%;
                 background-size: cover;
                 background-position: center;
-                background-repeat: no-repeat; /* Added no-repeat */
+                background-repeat: no-repeat;
                 opacity: 0;
                 transition: opacity 1s ease-in-out;
             }
 
-            /* Added overlay for hero slides */
             .hero-slide::before {
                 content: "";
                 position: absolute;
@@ -81,12 +80,7 @@
                 left: 0;
                 width: 100%;
                 height: 100%;
-                background-color: rgba(
-                    0,
-                    0,
-                    0,
-                    0.5
-                ); /* 50% opacity black overlay */
+                background-color: rgba(0, 0, 0, 0.5);
                 z-index: 1;
             }
 
@@ -115,6 +109,12 @@
                 background: rgba(255, 255, 255, 0.95);
                 backdrop-filter: blur(10px);
                 box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+                transition: all 0.3s ease;
+            }
+
+            .navbar.scrolled {
+                background: rgba(255, 255, 255, 0.98);
+                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
             }
 
             .navbar-brand {
@@ -133,6 +133,7 @@
                 display: flex;
                 flex-direction: column;
                 line-height: 1.1;
+                margin-left: 10px;
             }
 
             .logo-main {
@@ -275,7 +276,6 @@
                 padding: 10px;
             }
 
-            /* Fixed Carousel Controls */
             .carousel-control-prev,
             .carousel-control-next {
                 width: 40px;
@@ -439,74 +439,135 @@
                 color: #128c7e;
             }
 
-            .custom-logo {
-                width: 120px;
-                height: 60px;
-                margin-right: 10px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                background-color: #f8f9fa;
-                border: 1px dashed #dee2e6;
-                border-radius: 8px;
-                color: #6c757d;
-                font-weight: bold;
+            /* Contact Info Cards Styles */
+            .contact-card {
+                background: white;
+                border-radius: 15px;
+                padding: 30px;
+                height: 100%;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+                transition: all 0.3s ease;
+                text-align: center;
+                border-top: 5px solid var(--primary-red);
             }
 
-            .custom-logo img {
-                width: 100%;
-                height: 100%;
+            .contact-card:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 20px 40px rgba(211, 47, 47, 0.1);
+            }
+
+            .contact-icon {
+                font-size: 3rem;
+                margin-bottom: 20px;
+                color: var(--primary-red);
+            }
+
+            .contact-title {
+                font-weight: 600;
+                margin-bottom: 15px;
+                color: #333;
+            }
+
+            .contact-details p {
+                margin-bottom: 10px;
+                color: #666;
+            }
+
+            .contact-details i {
+                color: var(--primary-red);
+                margin-right: 10px;
+                width: 20px;
+            }
+
+            /* Logo styles */
+            .navbar-logo {
+                width: 120px;
+                height: 60px;
                 object-fit: contain;
             }
 
-            .logo-placeholder {
-                font-size: 0.8rem;
-                text-align: center;
+            .footer-logo {
+                width: 120px;
+                height: 60px;
+                object-fit: contain;
+                margin-bottom: 15px;
             }
 
-            /* Responsive adjustments for provider logos */
+            /* Provider logo placeholders */
+            .provider-placeholder {
+                width: 100%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
+                border-radius: 8px;
+                color: #666;
+                font-weight: bold;
+                font-size: 1.2rem;
+            }
+
+            /* Responsive adjustments */
             @media (max-width: 768px) {
-                .custom-logo {
+                .hero-section {
+                    height: 70vh;
+                }
+                
+                .logo-main {
+                    font-size: 1.5rem;
+                }
+                
+                .logo-sub {
+                    font-size: 0.6rem;
+                }
+                
+                .navbar-logo {
                     width: 100px;
                     height: 50px;
                 }
-
+                
                 .carousel-control-prev,
                 .carousel-control-next {
                     width: 35px;
                     height: 35px;
                     margin: 0 10px;
                 }
-
+                
                 .provider-logo {
                     height: 80px;
                 }
-
-                /* Show only 2 logos per row on tablets and below */
-                .carousel-inner .row .col-6 {
-                    width: 50% !important;
-                    max-width: 50% !important;
-                    flex: 0 0 50% !important;
+                
+                .contact-card {
+                    margin-bottom: 30px;
                 }
             }
 
             @media (max-width: 576px) {
+                .hero-section {
+                    height: 60vh;
+                }
+                
+                .hero-content h1 {
+                    font-size: 2.5rem;
+                }
+                
+                .hero-content h2 {
+                    font-size: 1.5rem;
+                }
+                
                 .provider-logo {
                     height: 60px;
                 }
-
+                
                 .carousel-control-prev,
                 .carousel-control-next {
                     width: 30px;
                     height: 30px;
                     margin: 0 5px;
                 }
-
-                /* Ensure only 2 logos per row on mobile */
-                .carousel-inner .row .col-6 {
-                    width: 50% !important;
-                    max-width: 50% !important;
-                    flex: 0 0 50% !important;
+                
+                .contact-card {
+                    padding: 20px;
                 }
             }
         </style>
@@ -517,12 +578,7 @@
             <div class="container">
                 <a class="navbar-brand fw-bold" href="#">
                     <div class="logo-container">
-                        <div class="custom-logo" id="mainLogo">
-                            <div class="logo-placeholder">
-                                ICP LOGO<br />
-                                <small>120px × 60px</small>
-                            </div>
-                        </div>
+                        <img src="https://github.com/wizardofwebsites/icp-courier/blob/main/image/icplogo.png" alt="ICP Express Logo" class="navbar-logo">
                         <div class="logo-text">
                             <span class="logo-main">ICP EXPRESS</span>
                             <span class="logo-sub"
@@ -569,9 +625,6 @@
         >
             <i class="fab fa-whatsapp whatsapp-icon"></i>
         </a>
-
-        <!-- Hidden Admin Access Trigger -->
-        <div id="adminTrigger" style="display: none"></div>
 
         <!-- Hero Section with Slider -->
         <section id="home" class="hero-section">
@@ -902,10 +955,9 @@
                                         class="col-lg-3 col-md-4 col-6 text-center mb-4"
                                     >
                                         <div class="provider-logo">
-                                            <img
-                                                src="image/fedex.png"
-                                                alt="FedEx"
-                                            />
+                                            <div class="provider-placeholder">
+                                                FedEx
+                                            </div>
                                         </div>
                                         <h6 class="mt-2">FedEx</h6>
                                     </div>
@@ -913,10 +965,9 @@
                                         class="col-lg-3 col-md-4 col-6 text-center mb-4"
                                     >
                                         <div class="provider-logo">
-                                            <img
-                                                src="image/dhl.png"
-                                                alt="DHL"
-                                            />
+                                            <div class="provider-placeholder">
+                                                DHL
+                                            </div>
                                         </div>
                                         <h6 class="mt-2">DHL</h6>
                                     </div>
@@ -924,10 +975,9 @@
                                         class="col-lg-3 col-md-4 col-6 text-center mb-4"
                                     >
                                         <div class="provider-logo">
-                                            <img
-                                                src="image/ups.png"
-                                                alt="UPS"
-                                            />
+                                            <div class="provider-placeholder">
+                                                UPS
+                                            </div>
                                         </div>
                                         <h6 class="mt-2">UPS</h6>
                                     </div>
@@ -935,10 +985,9 @@
                                         class="col-lg-3 col-md-4 col-6 text-center mb-4"
                                     >
                                         <div class="provider-logo">
-                                            <img
-                                                src="image/dpd.png"
-                                                alt="DPD"
-                                            />
+                                            <div class="provider-placeholder">
+                                                DPD
+                                            </div>
                                         </div>
                                         <h6 class="mt-2">DPD</h6>
                                     </div>
@@ -950,10 +999,9 @@
                                         class="col-lg-3 col-md-4 col-6 text-center mb-4"
                                     >
                                         <div class="provider-logo">
-                                            <img
-                                                src="image/usps.png"
-                                                alt="Aramex"
-                                            />
+                                            <div class="provider-placeholder">
+                                                Aramex
+                                            </div>
                                         </div>
                                         <h6 class="mt-2">Aramex</h6>
                                     </div>
@@ -961,16 +1009,12 @@
                                         class="col-lg-3 col-md-4 col-6 text-center mb-4"
                                     >
                                         <div class="provider-logo">
-                                            <img
-                                                src="image/usps.png"
-                                                alt="USPS"
-                                            />
+                                            <div class="provider-placeholder">
+                                                USPS
+                                            </div>
                                         </div>
                                         <h6 class="mt-2">USPS</h6>
                                     </div>
-                                    <!-- Empty columns to maintain 4 items per row on desktop -->
-                                    <div class="col-lg-3 col-md-4 col-6"></div>
-                                    <div class="col-lg-3 col-md-4 col-6"></div>
                                 </div>
                             </div>
                         </div>
@@ -1039,10 +1083,9 @@
                                         class="col-lg-3 col-md-4 col-6 text-center mb-4"
                                     >
                                         <div class="provider-logo">
-                                            <img
-                                                src="image/dtdc.png"
-                                                alt="DTDC"
-                                            />
+                                            <div class="provider-placeholder">
+                                                DTDC
+                                            </div>
                                         </div>
                                         <h6 class="mt-2">DTDC</h6>
                                     </div>
@@ -1050,10 +1093,9 @@
                                         class="col-lg-3 col-md-4 col-6 text-center mb-4"
                                     >
                                         <div class="provider-logo">
-                                            <img
-                                                src="image/bluedart.png"
-                                                alt="Blue Dart"
-                                            />
+                                            <div class="provider-placeholder">
+                                                Blue Dart
+                                            </div>
                                         </div>
                                         <h6 class="mt-2">Blue Dart</h6>
                                     </div>
@@ -1061,10 +1103,9 @@
                                         class="col-lg-3 col-md-4 col-6 text-center mb-4"
                                     >
                                         <div class="provider-logo">
-                                            <img
-                                                src="image/delhivery.png"
-                                                alt="Delhivery"
-                                            />
+                                            <div class="provider-placeholder">
+                                                Delhivery
+                                            </div>
                                         </div>
                                         <h6 class="mt-2">Delhivery</h6>
                                     </div>
@@ -1072,10 +1113,9 @@
                                         class="col-lg-3 col-md-4 col-6 text-center mb-4"
                                     >
                                         <div class="provider-logo">
-                                            <img
-                                                src="image/ecom.png"
-                                                alt="Ecom Express"
-                                            />
+                                            <div class="provider-placeholder">
+                                                Ecom Express
+                                            </div>
                                         </div>
                                         <h6 class="mt-2">Ecom Express</h6>
                                     </div>
@@ -1087,10 +1127,9 @@
                                         class="col-lg-3 col-md-4 col-6 text-center mb-4"
                                     >
                                         <div class="provider-logo">
-                                            <img
-                                                src="image/xpress.png"
-                                                alt="XpressBees"
-                                            />
+                                            <div class="provider-placeholder">
+                                                XpressBees
+                                            </div>
                                         </div>
                                         <h6 class="mt-2">XpressBees</h6>
                                     </div>
@@ -1098,10 +1137,9 @@
                                         class="col-lg-3 col-md-4 col-6 text-center mb-4"
                                     >
                                         <div class="provider-logo">
-                                            <img
-                                                src="image/shiprocket.png"
-                                                alt="Shiprocket"
-                                            />
+                                            <div class="provider-placeholder">
+                                                Shiprocket
+                                            </div>
                                         </div>
                                         <h6 class="mt-2">Shiprocket</h6>
                                     </div>
@@ -1109,15 +1147,12 @@
                                         class="col-lg-3 col-md-4 col-6 text-center mb-4"
                                     >
                                         <div class="provider-logo">
-                                            <img
-                                                src="image/postoffice.png"
-                                                alt="Safexpress"
-                                            />
+                                            <div class="provider-placeholder">
+                                                Indian Post
+                                            </div>
                                         </div>
                                         <h6 class="mt-2">Indian Postal</h6>
                                     </div>
-                                    <!-- Empty column to maintain 4 items per row on desktop -->
-                                    <div class="col-lg-3 col-md-4 col-6"></div>
                                 </div>
                             </div>
                         </div>
@@ -1185,6 +1220,59 @@
                         WhatsApp
                     </p>
                 </div>
+                
+                <!-- Contact Info Cards -->
+                <div class="row mb-5">
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="contact-card">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <h4 class="contact-title">Head Office</h4>
+                            <div class="contact-details">
+                                <p><i class="fas fa-map-pin"></i> 123 Courier Street, Logistics City, Mumbai 400001</p>
+                                <p><i class="fas fa-phone"></i> +91 22 1234 5678</p>
+                                <p><i class="fas fa-mobile-alt"></i> +91 98765 43210</p>
+                                <p><i class="fas fa-envelope"></i> headoffice@icpexpress.com</p>
+                                <p><i class="fas fa-clock"></i> Mon-Sun: 24/7 Operations</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="contact-card">
+                            <div class="contact-icon">
+                                <i class="fas fa-plane-departure"></i>
+                            </div>
+                            <h4 class="contact-title">International Hub</h4>
+                            <div class="contact-details">
+                                <p><i class="fas fa-map-pin"></i> 456 Airport Road, Cargo Terminal, Delhi 110037</p>
+                                <p><i class="fas fa-phone"></i> +91 11 2345 6789</p>
+                                <p><i class="fas fa-mobile-alt"></i> +91 98765 43211</p>
+                                <p><i class="fas fa-envelope"></i> international@icpexpress.com</p>
+                                <p><i class="fas fa-clock"></i> Mon-Fri: 8AM-10PM, Sat-Sun: 9AM-8PM</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="contact-card">
+                            <div class="contact-icon">
+                                <i class="fas fa-truck"></i>
+                            </div>
+                            <h4 class="contact-title">Domestic Division</h4>
+                            <div class="contact-details">
+                                <p><i class="fas fa-map-pin"></i> 789 Logistics Park, Industrial Area, Bangalore 560068</p>
+                                <p><i class="fas fa-phone"></i> +91 80 3456 7890</p>
+                                <p><i class="fas fa-mobile-alt"></i> +91 98765 43212</p>
+                                <p><i class="fas fa-envelope"></i> domestic@icpexpress.com</p>
+                                <p><i class="fas fa-clock"></i> Mon-Sat: 7AM-11PM, Sun: 9AM-6PM</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Contact Form -->
                 <div class="row">
                     <div class="col-md-8 mx-auto">
                         <div class="contact-form">
@@ -1310,14 +1398,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-4 mb-4">
-                        <div class="logo-container mb-3">
-                            <div class="custom-logo" id="footerLogo">
-                                <div class="logo-placeholder">
-                                    ICP LOGO<br />
-                                    <small>120px × 60px</small>
-                                </div>
-                            </div>
-                        </div>
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Nazarene_logo_120x60.svg/960px-Nazarene_logo_120x60.svg.png" alt="ICP Express Logo" class="footer-logo">
                         <p>
                             Your trusted partner for reliable international
                             courier services with a commitment to excellence and
@@ -1357,7 +1438,7 @@
                     <div class="col-lg-3 col-md-6 mb-4">
                         <h5 class="mb-3">Contact Info</h5>
                         <p class="mb-2">
-                            <i class="fas fa-phone me-2"></i> +1 (555) 123-4567
+                            <i class="fas fa-phone me-2"></i> +91 22 1234 5678
                         </p>
                         <p class="mb-2">
                             <i class="fas fa-envelope me-2"></i>
@@ -1365,7 +1446,7 @@
                         </p>
                         <p class="mb-2">
                             <i class="fas fa-map-marker-alt me-2"></i> 123
-                            Courier St, Logistics City
+                            Courier St, Mumbai 400001
                         </p>
                         <p><i class="fas fa-clock me-2"></i> Mon-Sun: 24/7</p>
                     </div>
@@ -1399,12 +1480,10 @@
         <!-- Bootstrap JS -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-        <!-- Website Script (Public) -->
+        <!-- Website Script -->
         <script>
             // Initialize the website
             document.addEventListener("DOMContentLoaded", function () {
-                updateWebsiteLogos();
-
                 // Hero Slider Functionality
                 let currentSlide = 0;
                 const slides = document.querySelectorAll(".hero-slide");
@@ -1426,11 +1505,15 @@
                 document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
                     anchor.addEventListener("click", function (e) {
                         e.preventDefault();
-                        document
-                            .querySelector(this.getAttribute("href"))
-                            .scrollIntoView({
+                        const targetId = this.getAttribute("href");
+                        if (targetId === "#") return;
+                        
+                        const targetElement = document.querySelector(targetId);
+                        if (targetElement) {
+                            targetElement.scrollIntoView({
                                 behavior: "smooth",
                             });
+                        }
                     });
                 });
 
@@ -1443,22 +1526,18 @@
                     } else {
                         backToTopButton.classList.remove("visible");
                     }
+                    
+                    // Navbar background on scroll
+                    if (window.scrollY > 50) {
+                        document.querySelector(".navbar").classList.add("scrolled");
+                    } else {
+                        document.querySelector(".navbar").classList.remove("scrolled");
+                    }
                 });
 
                 backToTopButton.addEventListener("click", (e) => {
                     e.preventDefault();
                     window.scrollTo({ top: 0, behavior: "smooth" });
-                });
-
-                // Navbar background on scroll
-                window.addEventListener("scroll", function () {
-                    if (window.scrollY > 50) {
-                        document.querySelector(".navbar").style.background =
-                            "rgba(255, 255, 255, 0.98)";
-                    } else {
-                        document.querySelector(".navbar").style.background =
-                            "rgba(255, 255, 255, 0.95)";
-                    }
                 });
 
                 // Form submission handler
@@ -1472,7 +1551,6 @@
 
             // WhatsApp Integration Script
             function sendToWhatsapp() {
-                // Replace with your actual WhatsApp number
                 let number = "+917989297197";
 
                 let name = document.getElementById("name").value;
@@ -1512,284 +1590,8 @@
                     window.open(url, "_blank").focus();
                 }, 1000);
 
-                // Prevent form submission
                 return false;
             }
-
-            // Update Website Logos
-            function updateWebsiteLogos() {
-                // Check if logo exists in localStorage (admin panel will set this)
-                const savedMainLogo = localStorage.getItem("icpMainLogo");
-                if (savedMainLogo) {
-                    const mainLogo = document.getElementById("mainLogo");
-                    const footerLogo = document.getElementById("footerLogo");
-
-                    if (mainLogo) {
-                        mainLogo.innerHTML = `<img src="${savedMainLogo}" alt="ICP Express" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\\'logo-placeholder\\'>ICP LOGO<br><small>120px × 60px</small></div>';">`;
-                    }
-
-                    if (footerLogo) {
-                        footerLogo.innerHTML = `<img src="${savedMainLogo}" alt="ICP Express" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\\'logo-placeholder\\'>ICP LOGO<br><small>120px × 60px</small></div>';">`;
-                    }
-                }
-            }
-
-            // Admin access trigger
-            document
-                .getElementById("adminTrigger")
-                .addEventListener("click", function () {
-                    loadAdminScript();
-                });
-        </script>
-
-        <!-- Hidden Admin Script (Loaded dynamically) -->
-        <script id="adminScriptLoader" type="text/javascript">
-            // This script will be loaded dynamically when needed
-            function loadAdminScript() {
-                // Create a hidden iframe to load admin script
-                const iframe = document.createElement("iframe");
-                iframe.style.display = "none";
-                iframe.srcdoc = `
-                <!DOCTYPE html>
-                <html>
-                <head>
-                    <title>Admin Loader</title>
-                    <script>
-                        // Admin Panel Password
-                        const ADMIN_PASSWORD = "icpadmin2023";
-
-                        // Check if password is correct
-                        function checkPassword() {
-                            const savedPassword = localStorage.getItem('icpAdminPassword');
-                            return savedPassword === ADMIN_PASSWORD;
-                        }
-
-                        // Load admin panel if password is correct
-                        if (checkPassword()) {
-                            // Create admin panel elements
-                            const adminPanel = document.createElement('div');
-                            adminPanel.id = 'adminPanel';
-                            adminPanel.innerHTML = \`
-                                <style>
-                                    .admin-panel {
-                                        position: fixed;
-                                        top: 0;
-                                        left: 0;
-                                        width: 100%;
-                                        height: 100%;
-                                        background: rgba(0,0,0,0.9);
-                                        z-index: 9999;
-                                        overflow-y: auto;
-                                        padding: 20px;
-                                        display: block;
-                                    }
-
-                                    .admin-container {
-                                        background: white;
-                                        border-radius: 15px;
-                                        padding: 30px;
-                                        max-width: 800px;
-                                        margin: 50px auto;
-                                        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-                                    }
-
-                                    .admin-header {
-                                        display: flex;
-                                        justify-content: space-between;
-                                        align-items: center;
-                                        margin-bottom: 30px;
-                                        padding-bottom: 15px;
-                                        border-bottom: 2px solid #d32f2f;
-                                    }
-
-                                    .admin-section {
-                                        margin-bottom: 40px;
-                                        padding: 20px;
-                                        border: 1px solid #e0e0e0;
-                                        border-radius: 10px;
-                                    }
-
-                                    .admin-section h3 {
-                                        color: #d32f2f;
-                                        margin-bottom: 20px;
-                                    }
-
-                                    .upload-area {
-                                        border: 2px dashed #ccc;
-                                        border-radius: 10px;
-                                        padding: 30px;
-                                        text-align: center;
-                                        margin-bottom: 20px;
-                                        transition: all 0.3s ease;
-                                    }
-
-                                    .logo-preview {
-                                        width: 120px;
-                                        height: 60px;
-                                        margin: 0 auto 20px;
-                                        border: 1px solid #e0e0e0;
-                                        border-radius: 8px;
-                                        display: flex;
-                                        align-items: center;
-                                        justify-content: center;
-                                        overflow: hidden;
-                                    }
-
-                                    .file-path-input {
-                                        margin-top: 15px;
-                                    }
-                                </style>
-                                <div class="admin-container">
-                                    <div class="admin-header">
-                                        <h2>ICP Express - Admin Panel</h2>
-                                        <button class="btn btn-outline-danger" id="closeAdminPanel">
-                                            <i class="fas fa-times me-2"></i>Close
-                                        </button>
-                                    </div>
-
-                                    <div class="admin-section">
-                                        <h3>Main Company Logo</h3>
-                                        <p class="text-muted mb-3">Upload your main company logo (Recommended: 120px × 60px)</p>
-
-                                        <div class="upload-area" id="mainLogoUpload">
-                                            <i class="fas fa-cloud-upload-alt fa-3x text-muted mb-3"></i>
-                                            <p>Drag & drop your logo here or click to browse</p>
-                                            <input type="file" id="mainLogoInput" accept="image/*" style="display: none;">
-                                            <button class="btn btn-outline-primary mt-2" onclick="document.getElementById('mainLogoInput').click()">
-                                                Select Logo
-                                            </button>
-                                        </div>
-
-                                        <div class="file-path-input">
-                                            <label class="form-label">Or enter image path:</label>
-                                            <div class="input-group">
-                                                <input type="text" class="form-control" id="mainLogoPath" placeholder="images/icplogo.png">
-                                                <button class="btn btn-primary" id="loadMainLogoPath">Load Logo</button>
-                                            </div>
-                                        </div>
-
-                                        <div class="logo-preview" id="mainLogoPreview">
-                                            <div class="logo-placeholder">
-                                                Logo Preview<br>
-                                                <small>120px × 60px</small>
-                                            </div>
-                                        </div>
-
-                                        <div class="d-flex justify-content-between mt-3">
-                                            <button class="btn btn-primary" id="saveMainLogo">
-                                                <i class="fas fa-save me-2"></i>Save Logo
-                                            </button>
-                                            <button class="btn btn-outline-secondary" id="resetMainLogo">
-                                                <i class="fas fa-undo me-2"></i>Reset to Default
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            \`;
-
-                            document.body.appendChild(adminPanel);
-
-                            // Add event listeners
-                            document.getElementById('closeAdminPanel').addEventListener('click', function() {
-                                adminPanel.remove();
-                            });
-
-                            // Load saved logo
-                            const savedMainLogo = localStorage.getItem('icpMainLogo');
-                            if (savedMainLogo) {
-                                document.getElementById('mainLogoPreview').innerHTML = \`<img src="\${savedMainLogo}" alt="Logo Preview">\`;
-                            }
-
-                            // Main Logo Upload
-                            document.getElementById('mainLogoInput').addEventListener('change', function(e) {
-                                const file = e.target.files[0];
-                                if (file) {
-                                    const reader = new FileReader();
-                                    reader.onload = function(e) {
-                                        document.getElementById('mainLogoPreview').innerHTML = \`<img src="\${e.target.result}" alt="Logo Preview">\`;
-                                        localStorage.setItem('icpMainLogo', e.target.result);
-                                        // Update parent window
-                                        window.parent.postMessage({type: 'logoUpdated', logo: e.target.result}, '*');
-                                    };
-                                    reader.readAsDataURL(file);
-                                }
-                            });
-
-                            // Load Main Logo from Path
-                            document.getElementById('loadMainLogoPath').addEventListener('click', function() {
-                                const path = document.getElementById('mainLogoPath').value.trim();
-                                if (path) {
-                                    document.getElementById('mainLogoPreview').innerHTML = \`<img src="\${path}" alt="Logo Preview" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\\'logo-placeholder\\'>Invalid Path<br><small>120px × 60px</small></div>';">\`;
-                                    localStorage.setItem('icpMainLogo', path);
-                                    window.parent.postMessage({type: 'logoUpdated', logo: path}, '*');
-                                }
-                            });
-
-                            // Save Main Logo
-                            document.getElementById('saveMainLogo').addEventListener('click', function() {
-                                const logo = localStorage.getItem('icpMainLogo');
-                                if (logo) {
-                                    alert('Main logo saved successfully!');
-                                    window.parent.postMessage({type: 'logoUpdated', logo: logo}, '*');
-                                } else {
-                                    alert('Please upload a logo or enter a valid path first.');
-                                }
-                            });
-
-                            // Reset Main Logo
-                            document.getElementById('resetMainLogo').addEventListener('click', function() {
-                                localStorage.removeItem('icpMainLogo');
-                                document.getElementById('mainLogoPreview').innerHTML = \`
-                                    <div class="logo-placeholder">
-                                        Logo Preview<br>
-                                        <small>120px × 60px</small>
-                                    </div>
-                                \`;
-                                alert('Main logo reset to default.');
-                                window.parent.postMessage({type: 'logoUpdated', logo: null}, '*');
-                            });
-                        }
-                    <\/script>
-                </head>
-                <body>
-                    <div id="adminContent"></div>
-                </body>
-                </html>
-            `;
-
-                document.body.appendChild(iframe);
-
-                // Listen for messages from iframe
-                window.addEventListener("message", function (event) {
-                    if (event.data.type === "logoUpdated") {
-                        updateWebsiteLogos();
-                    }
-                });
-            }
-
-            // Secret admin access (triggered by specific sequence)
-            let keySequence = "";
-            const secretCode = "icpadmin";
-
-            document.addEventListener("keydown", function (e) {
-                keySequence += e.key.toLowerCase();
-                if (keySequence.length > secretCode.length) {
-                    keySequence = keySequence.substring(
-                        keySequence.length - secretCode.length,
-                    );
-                }
-
-                if (keySequence === secretCode) {
-                    // Show password prompt
-                    const password = prompt("Enter admin password:");
-                    if (password === "icpadmin2023") {
-                        localStorage.setItem("icpAdminPassword", password);
-                        loadAdminScript();
-                        alert("Admin panel loaded. Refresh page to access.");
-                    }
-                    keySequence = "";
-                }
-            });
         </script>
     </body>
 </html>
